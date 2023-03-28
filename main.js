@@ -1,3 +1,10 @@
+/*
+TO_DO
+1. apis() 만들기
+2. 객체 잘 활용하기
+3. api와 render의 구분 (실행 순서 고민)
+*/
+
 const productList = [];
 const categoryList = [];
 const content = document.getElementById("content");
