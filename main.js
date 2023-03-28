@@ -1,6 +1,6 @@
 /*
-TO_DO
-  1. apis() 만들기 => POST까지
+TODO
+  1. apis()로 작업해보기
   2. 객체 잘 활용하기 중요!
   3. 관심사의 분리가 약함
     - Render는 Render만 해야함
@@ -10,6 +10,7 @@ const productList = {};
 const categoryList = {};
 const content = document.getElementById("content");
 const categoryArea = document.getElementById("categoryArea");
+const paginationList = document.getElementById("paginationList");
 
 const apis = () => {
   const baseURL = "https://fakestoreapi.com";
@@ -32,6 +33,7 @@ apis()
   .then((data) => {
     productList.items = data;
     productRender();
+    pagination();
   });
 
 apis()
@@ -39,6 +41,7 @@ apis()
   .then((data) => {
     categoryList.items = data;
     categoryRender();
+    pagination();
   });
 
 const productRender = () => {
@@ -72,4 +75,19 @@ async function onCategoryMoveEvent(e) {
   const data = await apis().get(`products/category/${innerText}`);
   productList.items = data;
   productRender();
+}
+
+function pagination() {
+  const pageGroup = Math.ceil(page / 3 + 1) - 1;
+  const lastPage = pageGroup * 3;
+  const firstPage = lastPage - 2;
+  let paginationHTML = ``;
+
+  for (let i = firstPage; i <= lastPage; i++) {
+    paginationHTML += `
+        <li class="page-item"><a class="page-link" href="#">${i}</a></li>
+    `;
+  }
+
+  paginationList.innerHTML = paginationHTML;
 }
