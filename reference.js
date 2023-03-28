@@ -1,5 +1,5 @@
 /*
-TO_DO
+  TODO
   1. apis() 만들기 => POST까지
   2. 객체 잘 활용하기 중요!
   3. 관심사의 분리가 약함
@@ -28,18 +28,29 @@ const apis = () => {
 };
 
 apis()
+  .get("products/categories")
+  .then((data) => {
+    categoryList.items = data;
+    categoryRender();
+  });
+apis()
   .get("products")
   .then((data) => {
     productList.items = data;
     productRender();
   });
 
-apis()
-  .get("products/categories")
-  .then((data) => {
-    categoryList.items = data;
-    categoryRender();
+const categoryRender = () => {
+  let categoryHTML = "";
+  categoryList.items.forEach((items, idx) => {
+    categoryHTML += `<div id=${idx} class="category">${items}</div>`;
   });
+  categoryArea.innerHTML = categoryHTML;
+  const categories = document.querySelectorAll(".category");
+  categories.forEach((c) => {
+    c.addEventListener("click", onCategoryMoveEvent);
+  });
+};
 
 const productRender = () => {
   content.innerHTML = null;
@@ -52,18 +63,6 @@ const productRender = () => {
             <div>${items.price}</div>
     <div class="contentBox">`;
     content.appendChild(divEl);
-  });
-};
-
-const categoryRender = () => {
-  let categoryHTML = "";
-  categoryList.items.forEach((items, idx) => {
-    categoryHTML += `<div id=${idx} class="category">${items}</div>`;
-  });
-  categoryArea.innerHTML = categoryHTML;
-  const categories = document.querySelectorAll(".category");
-  categories.forEach((c) => {
-    c.addEventListener("click", onCategoryMoveEvent);
   });
 };
 
