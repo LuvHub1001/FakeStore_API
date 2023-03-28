@@ -1,31 +1,30 @@
 let url;
-let productList;
+const productList = [];
 const content = document.getElementById("content");
 
 const productAPI = async () => {
   url = new URL("https://fakestoreapi.com/products");
   const res = await fetch(url);
   const data = await res.json();
-  productList = data;
-
+  productList.push(...data);
   productRender();
 };
 productAPI();
 
 const productRender = () => {
-  let productHTML = "";
   productList.forEach((items) => {
-    return (productHTML += `
-    <div class="contentBox">
-        <div class="contentCotainer">
+    const divEl = document.createElement("div");
+    divEl.innerHTML = `
+    <div class="contentBox" id="contentBox">
             <img id="contentImg" src="${items.image}"></img>
             <div>${items.title}</div>
             <div>${items.price}</div>
-        </div>
-    <div class="contentBox">
-    `);
+    <div class="contentBox">`;
+    content.appendChild(divEl);
   });
-  content.innerHTML = productHTML;
 };
 
-productRender();
+const apis = () => {
+  baseURL = "https://fakestoreapi.com";
+  return {};
+};
