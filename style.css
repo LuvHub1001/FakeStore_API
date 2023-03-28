@@ -8,7 +8,7 @@
   background-color: black;
 }
 
-#tabArea {
+#categoryArea {
   display: flex;
   justify-content: space-between;
   background-color: black;
@@ -22,9 +22,17 @@
 #content {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   text-align: center;
   place-items: center;
+  border: 1px solid black;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px;
+}
+
+.contentBox {
+  margin-top: 3rem;
+  justify-content: space-between;
 }
 
 #contentImg {
@@ -32,12 +40,18 @@
   height: 150px;
 }
 
-#tabArea div {
+#categoryArea div {
   width: 100%;
   text-align: center;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
 }
 
-#tabArea div:hover {
+#categoryArea div:last-child {
+  border-right: none;
+}
+
+#categoryArea div:hover {
   cursor: pointer;
   background-color: white;
   color: black;
