@@ -10,6 +10,8 @@ const productList = {};
 const categoryList = {};
 const content = document.getElementById("content");
 const categoryArea = document.getElementById("categoryArea");
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
 const paginationList = document.getElementById("paginationList");
 
 const apis = () => {
@@ -77,6 +79,19 @@ async function onCategoryMoveEvent(e) {
   productRender();
 }
 
+const searchRender = () => {
+  console.log(productList.items);
+  productList.items.find((item) => {
+    item.title.includes("F");
+  });
+};
+
+searchInput.addEventListener("click", () => (searchInput.value = ""));
+searchBtn.addEventListener("click", (keyword) => {
+  const searchValue = searchInput.value;
+  keyword = searchValue;
+});
+
 function pagination() {
   const pageGroup = Math.ceil(page / 3 + 1) - 1;
   const lastPage = pageGroup * 3;
@@ -88,6 +103,5 @@ function pagination() {
         <li class="page-item"><a class="page-link" href="#">${i}</a></li>
     `;
   }
-
   paginationList.innerHTML = paginationHTML;
 }
